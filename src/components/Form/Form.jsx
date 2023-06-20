@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormStyle, InputLabel, FormInput, FormButton } from './Form.styled';
 import { addContacts } from 'redux/contacts/contactsSlice';
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export function Form({ onSubmitForm }) {
   const dispatch = useDispatch();

@@ -26,7 +26,7 @@ export function Form({ onSubmitForm }) {
 
   const handelOnSubmit = e => {
     e.preventDefault();
-    onSubmitForm(name, number);
+    onSubmitForm({ name, number });
     reset();
     dispatch(addContacts({ id: nanoid(), name, number }));
     return;

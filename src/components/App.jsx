@@ -35,9 +35,17 @@ export function App() {
     return;
   };
   const getVisibleContacts = () => {
-    const contactsInfo = Object.entries(data);
-    return contactsInfo.filter(([_, value]) => value.name);
+    const filteredObj = Object.fromEntries(
+      Object.entries(data).filter(([_, value]) => value.name.includes(filtered))
+    );
+    //  Object.fromEntries(
+    //   Object.entries(obj).filter(([key, value]) => key.startsWith('1'))
+    // );
+    // const contactsInfo = Object.entries(data);
+    // console.log(contactsInfo);
+    return filteredObj;
   };
+
   const filteredContact = getVisibleContacts();
   return (
     <Container>

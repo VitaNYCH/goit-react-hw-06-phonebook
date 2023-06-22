@@ -7,10 +7,7 @@ export const ContactList = data => {
   const contactInfo = Object.entries(data.data).flatMap(dataInfo =>
     dataInfo.slice(1)
   );
-  console.log(contactInfo);
   const dispatch = useDispatch();
-  // .data.flatMap(dataInfo =>
-  //   dataInfo.slice(1)
   return (
     <NameList>
       {contactInfo.map(({ id, name, number }) => (

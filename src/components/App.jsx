@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { toast } from 'react-toastify';
 import { Section } from './Section';
 import { Form } from './Form';
 import { Filter } from './Filter';
@@ -12,8 +11,6 @@ export function App() {
   const data = useSelector(getContacts);
 
   const filtered = useSelector(getFilter);
-  console.log(filtered);
-  console.log(data);
   const dispatch = useDispatch();
   const formSubmitHandler = ({ name, number }) => {
     console.log(data);
@@ -22,9 +19,7 @@ export function App() {
       name,
       number,
     };
-    console.log(data);
     const contactName = data.map(prevContact => prevContact.name);
-    console.log(contactName);
     if (contactName.includes(contact.name)) {
       alert(`${name} is already in contacts`);
       return;
@@ -35,42 +30,14 @@ export function App() {
     return;
   };
 
-  const toastifyOptions = {
-    position: 'bottom-left',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: 'colored',
-    toastId: 'custom-id-yes',
-  };
-  const getFilteredContacts = () => {
-    console.log(filtered);
-    console.log(data);
-    if (!filtered) {
-      return data;
-    }
+  const getVisibleContacts = () => {
     const normalizedFilter = filtered.toLowerCase();
-    const filteredContacts = data.filter(
-      ({ name, number }) =>
-        name.toLowerCase().trim().includes(normalizedFilter) ||
-        number.trim().includes(normalizedFilter)
+    return data.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
-    if (normalizedFilter && !filteredContacts.length) {
-      toast.warn(`No contacts matching your request`, toastifyOptions);
-    }
-    return filteredContacts;
   };
-  // const getVisibleContacts = () => {
-  //   const filteredObj = Object.fromEntries(
-  //     Object.entries(data).filter(([_, value]) => value.name.includes(filtered))
-  //   );
-  //   return filteredObj;
-  // };
 
-  const filteredContact = getFilteredContacts();
+  const filteredContact = getVisibleContacts();
   return (
     <Container>
       <Section title="Phonebook">
